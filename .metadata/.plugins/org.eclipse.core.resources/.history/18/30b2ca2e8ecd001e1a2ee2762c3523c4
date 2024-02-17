@@ -1,0 +1,13 @@
+package br.com.ehmf.webframework.web;
+
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class WebFrameworkDispatcherServlet extends HttpServlet {
+	
+	protected void service(HttpServletRequest req, HttpServletResponse res) {
+		
+	}
+
+}
