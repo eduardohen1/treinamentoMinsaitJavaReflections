@@ -26,6 +26,7 @@ public class HelloController {
 		return "Produto cadastrado";
 	}
 	
+	@WebframeworkGetMethod("/teste")
 	public String teste() {
 		return "Testes";
 	}

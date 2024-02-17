@@ -9,6 +9,10 @@ import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 
+import br.com.ehmf.webframework.annotations.WebframeworkGetMethod;
+import br.com.ehmf.webframework.annotations.WebframeworkPostMethod;
+import br.com.ehmf.webframework.datastructures.ControllerMap;
+import br.com.ehmf.webframework.datastructures.RequestControllerData;
 import br.com.ehmf.webframework.explorer.ClassExplorer;
 import br.com.ehmf.webframework.util.WebFrameworkLogger;
 
@@ -80,7 +84,11 @@ public class WebFrameworkWebApplication {
 					}
 				}
 			}
-		
+			for(RequestControllerData item : ControllerMap.values.values()) {
+				WebFrameworkLogger.log("", "     " + item.getHttpMethod() + ":" + item.getUrl() +
+											" [" + item.getControllerClass() + "." + item.getControllerMethod() + "]"
+						);
+			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,7 +101,22 @@ public class WebFrameworkWebApplication {
 		
 		//recuperar todos os métodos da classe
 		for(Method method : Class.forName(className).getDeclaredMethods()) {
-			WebFrameworkLogger.log(" - ", method.getName());
+			//WebFrameworkLogger.log(" - ", method.getName());
+			for(Annotation annotation : method.getAnnotations()) {
+				if(annotation.annotationType().getName()
+						.equals("br.com.ehmf.webframework.annotations.WebframeworkGetMethod")) {
+					httpMethod = "GET";
+					path = ((WebframeworkGetMethod)annotation).value();
+				}else if(annotation.annotationType().getName()
+						.equals("br.com.ehmf.webframework.annotations.WebframeworkPostMethod")) {
+					httpMethod = "POST";
+					path = ((WebframeworkPostMethod)annotation).value();
+				}
+			}
+			//WebFrameworkLogger.log(" - ", httpMethod + " " + path);
+			RequestControllerData getData = 
+					new RequestControllerData(httpMethod, path, className, method.getName());
+			ControllerMap.values.put(httpMethod + path, getData);
 		}
 		
 	}
