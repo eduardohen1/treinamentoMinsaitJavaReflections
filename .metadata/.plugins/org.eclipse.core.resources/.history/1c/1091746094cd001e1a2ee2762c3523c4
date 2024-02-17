@@ -15,14 +15,12 @@ public class WebFrameworkLogger {
 			DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	
 	public static void showBanner() {
-		System.out.println(AMARELO);
 		System.out.println("____    __    ____  _______ .______    _______ .______          ___      .___  ___.  ___________    __    ____  ______   .______       __  ___ ");
 		System.out.println("\\   \\  /  \\  /   / |   ____||   _  \\  |   ____||   _  \\        /   \\     |   \\/   | |   ____\\   \\  /  \\  /   / /  __  \\  |   _  \\     |  |/  / ");
 		System.out.println(" \\   \\/    \\/   /  |  |__   |  |_)  | |  |__   |  |_)  |      /  ^  \\    |  \\  /  | |  |__   \\   \\/    \\/   / |  |  |  | |  |_)  |    |  '  /  ");
 		System.out.println("  \\            /   |   __|  |   _  <  |   __|  |      /      /  /_\\  \\   |  |\\/|  | |   __|   \\            /  |  |  |  | |      /     |    <   ");
-		System.out.println("   \\    /\\    /    |  |____ |  |_)  | |  |     |  |\\  \\----./  _____  \\  |  |  |  | |  |____   \\    /\\    /   |  `--'  | |  |\\  \\----.|  .  \\  Framework WEB");
-		System.out.println("    \\__/  \\__/     |_______||______/  |__|     | _| `._____/__/     \\__\\ |__|  |__| |_______|   \\__/  \\__/     \\______/  | _| `._____||__|\\__\\ Capacitação Minsait 2024");
-		System.out.println(RESET);
+		System.out.println("   \\    /\\    /    |  |____ |  |_)  | |  |     |  |\\  \\----./  _____  \\  |  |  |  | |  |____   \\    /\\    /   |  `--'  | |  |\\  \\----.|  .  \\  ");
+		System.out.println("    \\__/  \\__/     |_______||______/  |__|     | _| `._____/__/     \\__\\ |__|  |__| |_______|   \\__/  \\__/     \\______/  | _| `._____||__|\\__\\ ");
 	}
 	
 	public static void log(String modulo, String mensagem) {

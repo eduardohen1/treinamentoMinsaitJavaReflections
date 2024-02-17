@@ -11,16 +11,7 @@ import br.com.ehmf.webframework.util.WebFrameworkLogger;
 public class WebFrameworkWebApplication {
 	
 	public static void run() {
-		//desligar todos os logs do apache tomcat
-		java.util.logging.Logger.getLogger("org.apache")
-			.setLevel(java.util.logging.Level.OFF);
-		long ini, fim;
-		
-		WebFrameworkLogger.showBanner();
-		
 		try {
-			ini = System.currentTimeMillis();
-			
 			WebFrameworkLogger.log("Embeded Web Container", "Iniciando WebframeworkWebApplication");
 			Tomcat tomcat = new Tomcat();
 			Connector connector = new Connector();
@@ -36,11 +27,6 @@ public class WebFrameworkWebApplication {
 			
 			//tudo que digitar na URL vai cair neste ponto:
 			context.addServletMappingDecoded("/*", "WebFrameworkDispatcherServlet");
-			
-			fim = System.currentTimeMillis();
-			WebFrameworkLogger.log("Embeded Web Container", "Tomcat iniciado em "
-					+ (double)((fim - ini)) +
-					"ms");
 			
 			//start:
 			tomcat.start();

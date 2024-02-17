@@ -16,8 +16,6 @@ public class WebFrameworkWebApplication {
 			.setLevel(java.util.logging.Level.OFF);
 		long ini, fim;
 		
-		WebFrameworkLogger.showBanner();
-		
 		try {
 			ini = System.currentTimeMillis();
 			
@@ -39,8 +37,8 @@ public class WebFrameworkWebApplication {
 			
 			fim = System.currentTimeMillis();
 			WebFrameworkLogger.log("Embeded Web Container", "Tomcat iniciado em "
-					+ (double)((fim - ini)) +
-					"ms");
+					+ (double)((fim - ini)/1000) +
+					" s");
 			
 			//start:
 			tomcat.start();

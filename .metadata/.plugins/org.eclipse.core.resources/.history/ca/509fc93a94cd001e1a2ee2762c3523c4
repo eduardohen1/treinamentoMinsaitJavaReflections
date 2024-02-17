@@ -16,8 +16,6 @@ public class WebFrameworkWebApplication {
 			.setLevel(java.util.logging.Level.OFF);
 		long ini, fim;
 		
-		WebFrameworkLogger.showBanner();
-		
 		try {
 			ini = System.currentTimeMillis();
 			
