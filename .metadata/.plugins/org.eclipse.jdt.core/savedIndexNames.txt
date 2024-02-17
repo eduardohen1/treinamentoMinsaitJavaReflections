@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\dev\Desenvolvimento\INDRA\treinamentoJavaReflections\.metadata\.plugins\org.eclipse.jdt.core
+3652742568.index
+2337261459.index

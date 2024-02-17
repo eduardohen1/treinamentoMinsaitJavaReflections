@@ -1,0 +1,10 @@
+2024-02-17 07:31:33,956 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2024-02-17 07:38:17,257 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-02-17 09:00:59,210 [Worker-17: Creating project "WebFramework"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: br.com.ehmf:WebFramework:0.0.1-SNAPSHOT @ C:\dev\Desenvolvimento\INDRA\treinamentoJavaReflections\WebFramework\pom.xml.
+2024-02-17 09:01:00,220 [Worker-17: Creating project "WebFramework"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /WebFramework/src/main/java
+2024-02-17 09:01:00,223 [Worker-17: Creating project "WebFramework"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /WebFramework/src/main/resources
+2024-02-17 09:01:00,225 [Worker-17: Creating project "WebFramework"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /WebFramework/src/test/java
+2024-02-17 09:01:00,226 [Worker-17: Creating project "WebFramework"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /WebFramework/src/test/resources
+2024-02-17 09:01:01,763 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2024-02-17 09:01:01,770 [Worker-20: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2024-02-17 09:01:01,773 [Worker-20: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
