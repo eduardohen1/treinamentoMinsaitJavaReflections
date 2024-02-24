@@ -1,8 +1,11 @@
 package br.com.ehmf.webframework.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 import com.google.gson.Gson;
 
@@ -62,16 +65,50 @@ public class WebFrameworkDispatcherServlet extends HttpServlet {
 				}
 			}
 			
-			WebFrameworkLogger.log("WebFrameworkDispatcherServlet", 
-					"Invocar o método " + controllerMethod.getName() + " para requisição");
-			
-			out.println(gson.toJson(controllerMethod.invoke(controller)));
+			//meu método tem parâmetros???
+			if(controllerMethod.getParameterCount() > 0) {
+				WebFrameworkLogger.log("WebFrameworkDispatcherServlet", "Método " 
+						+ controllerMethod.getName() + " tem parâmetros!");
+				Object arg;
+				Parameter parameter = controllerMethod.getParameters()[0];
+				if(parameter.getAnnotations()[0].annotationType().getName()
+						.equals("br.com.ehmf.webframework.annotations.WebframeworkBody")) {
+					
+					WebFrameworkLogger.log("", "     Procurando parâmetro da requisição do tipo " 
+							+ parameter.getType().getName());
+					String body = readBytesFromRequest(req);
+					
+					WebFrameworkLogger.log("", "     conteúdo do parâmetro: " 
+							+ body);
+					arg = gson.fromJson(body, parameter.getType());
+					
+					WebFrameworkLogger.log("WebFrameworkDispatcherServlet", 
+							"Invocar o método " + controllerMethod.getName() +
+							" com o parâmetro do tipo " + parameter.getType().toString() + 
+							" para requisição");				
+					out.println(gson.toJson(controllerMethod.invoke(controller, arg)));
+				}
+			} else {
+				WebFrameworkLogger.log("WebFrameworkDispatcherServlet", 
+						"Invocar o método " + controllerMethod.getName() + " para requisição");				
+				out.println(gson.toJson(controllerMethod.invoke(controller)));
+			}
 			out.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+
+	private String readBytesFromRequest(HttpServletRequest req) throws Exception {
+		StringBuilder stringBuilder = new StringBuilder();
+		String line;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(req.getInputStream()));
+		while((line = bufferedReader.readLine()) != null) {
+			stringBuilder.append(line);
+		}
+		return stringBuilder.toString();
 	}
 
 }
