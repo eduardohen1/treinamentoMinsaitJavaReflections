@@ -1,14 +1,19 @@
 package br.com.ehmf.mywebtestframework.controller;
 
 import br.com.ehmf.mywebtestframework.model.Produto;
+import br.com.ehmf.mywebtestframework.service.IService;
 import br.com.ehmf.webframework.annotations.WebframeworkBody;
 import br.com.ehmf.webframework.annotations.WebframeworkController;
 import br.com.ehmf.webframework.annotations.WebframeworkGetMethod;
+import br.com.ehmf.webframework.annotations.WebframeworkInject;
 import br.com.ehmf.webframework.annotations.WebframeworkPostMethod;
 
 @WebframeworkController
 public class HelloController {
 
+	@WebframeworkInject
+	private IService iService;
+	
 	@WebframeworkGetMethod("/hello")
 	public String returnHelloWorld() {
 		return "Return Hello world!!!";
@@ -29,6 +34,11 @@ public class HelloController {
 	@WebframeworkGetMethod("/teste")
 	public String teste() {
 		return "Testes";
+	}
+	
+	@WebframeworkGetMethod("/injected")
+	public String chamadaCustom() {
+		return iService.chamadaCustom("Hello injected");
 	}
 
 	

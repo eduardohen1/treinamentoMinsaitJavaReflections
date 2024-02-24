@@ -13,6 +13,7 @@ import br.com.ehmf.webframework.annotations.WebframeworkGetMethod;
 import br.com.ehmf.webframework.annotations.WebframeworkPostMethod;
 import br.com.ehmf.webframework.datastructures.ControllerMap;
 import br.com.ehmf.webframework.datastructures.RequestControllerData;
+import br.com.ehmf.webframework.datastructures.ServiceImplementationMap;
 import br.com.ehmf.webframework.explorer.ClassExplorer;
 import br.com.ehmf.webframework.util.WebFrameworkLogger;
 
@@ -81,6 +82,13 @@ public class WebFrameworkWebApplication {
 							.equals("br.com.ehmf.webframework.annotations.WebframeworkController")) {
 						WebFrameworkLogger.log("Metadata Explorer", "Found a Controller: " + classe);
 						extractMethods(classe);
+					}else if(classAnnotation.annotationType().getName()
+							.equals("br.com.ehmf.webframework.annotations.WebframeworkService")) {
+						WebFrameworkLogger.log("Metadata Explorer", "Found a Service Implementation: " + classe);
+						for(Class<?> interfaceWeb : Class.forName(classe).getInterfaces()) {
+							WebFrameworkLogger.log("Metadata Explorer", "     Class implements" + interfaceWeb.getName());
+							ServiceImplementationMap.implementations.put(interfaceWeb.getName(), classe);
+						}
 					}
 				}
 			}
