@@ -11,12 +11,12 @@ public class HelloController {
 
 	@WebframeworkGetMethod("/hello")
 	public String returnHelloWorld() {
-		return "Hello world!!!";
+		return "Return Hello world!!!";
 	}	
 	
 	@WebframeworkGetMethod("/produto")
-	public Produto exibirPorduto() {
-		Produto p = new Produto(1,"Nome1",2000.0,"teste.jpg");
+	public Produto exibirProduto() {
+		Produto p = new Produto(1,"Nome1",5432.1,"teste.jpg");
 		return p;
 	}
 	
@@ -30,6 +30,6 @@ public class HelloController {
 	public String teste() {
 		return "Testes";
 	}
-	
+
 	
 }

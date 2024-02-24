@@ -47,10 +47,10 @@ public class Produto {
 	public void setLinkFoto(String linkFoto) {
 		this.linkFoto = linkFoto;
 	}
-	
+		
 	@Override
 	public String toString() {		
-		return "Produto [id=" + this.id + ", nome = " + this.nome +
+		return "[ id = " + this.id + ", nome = " + this.nome +
 				", preco = " + this.valor + ", linkFoto = " + this.linkFoto +
 				"]";
 	}

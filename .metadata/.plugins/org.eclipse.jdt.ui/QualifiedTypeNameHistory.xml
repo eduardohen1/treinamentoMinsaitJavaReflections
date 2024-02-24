@@ -1,2 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServlet"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.connector.Connector"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.Context"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.startup.Tomcat"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.web.WebFrameworkDispatcherServlet"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="java.util.logging.Logger"/>
+    <fullyQualifiedTypeName name="java.util.logging.Level"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.lang.ClassLoader"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.web.WebFrameworkWebApplication"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.mywebtestframework.MyWebTestFramework"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.annotations.WebframeworkController"/>
+    <fullyQualifiedTypeName name="java.lang.annotation.Retention"/>
+    <fullyQualifiedTypeName name="java.lang.annotation.RetentionPolicy"/>
+    <fullyQualifiedTypeName name="java.lang.annotation.Target"/>
+    <fullyQualifiedTypeName name="java.lang.annotation.ElementType"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.mywebtestframework.model.Produto"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.annotations.WebframeworkBody"/>
+    <fullyQualifiedTypeName name="java.lang.Class"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.explorer.ClassExplorer"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
+    <fullyQualifiedTypeName name="java.lang.annotation.Annotation"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.annotations.WebframeworkPostMethod"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.datastructures.RequestControllerData"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.datastructures.ControllerMap"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.util.WebFrameworkLogger"/>
+    <fullyQualifiedTypeName name="br.com.ehmf.webframework.annotations.WebframeworkGetMethod"/>
+</qualifiedTypeNameHistroy>
