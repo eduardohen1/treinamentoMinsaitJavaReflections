@@ -1,5 +1,0 @@
-package br.com.ehmf.webframework.util;
-
-public class WebFrameworkLogger {
-
-}
