@@ -12,10 +12,12 @@ import org.apache.catalina.startup.Tomcat;
 import br.com.ehmf.webframework.annotations.WebframeworkGetMethod;
 import br.com.ehmf.webframework.annotations.WebframeworkPostMethod;
 import br.com.ehmf.webframework.datastructures.ControllerMap;
+import br.com.ehmf.webframework.datastructures.MethodParam;
 import br.com.ehmf.webframework.datastructures.RequestControllerData;
 import br.com.ehmf.webframework.datastructures.ServiceImplementationMap;
 import br.com.ehmf.webframework.explorer.ClassExplorer;
 import br.com.ehmf.webframework.util.WebFrameworkLogger;
+import br.com.ehmf.webframework.util.WebFrameworkUtil;
 
 public class WebFrameworkWebApplication {
 	
@@ -94,7 +96,8 @@ public class WebFrameworkWebApplication {
 			}
 			for(RequestControllerData item : ControllerMap.values.values()) {
 				WebFrameworkLogger.log("", "     " + item.getHttpMethod() + ":" + item.getUrl() +
-											" [" + item.getControllerClass() + "." + item.getControllerMethod() + "]"
+											" [" + item.getControllerClass() + "." + item.getControllerMethod() + "]" + 
+											(item.getParameter().length() > 0 ? " - Expected parameter " + item.getParameter() : "")
 						);
 			}
 		
@@ -106,24 +109,44 @@ public class WebFrameworkWebApplication {
 	private static void extractMethods(String className) throws Exception {
 		String httpMethod = "";
 		String path = "";
+		String parameter = "";
 		
 		//recuperar todos os métodos da classe
 		for(Method method : Class.forName(className).getDeclaredMethods()) {
+			parameter = "";
 			//WebFrameworkLogger.log(" - ", method.getName());
 			for(Annotation annotation : method.getAnnotations()) {
 				if(annotation.annotationType().getName()
 						.equals("br.com.ehmf.webframework.annotations.WebframeworkGetMethod")) {
 					httpMethod = "GET";
 					path = ((WebframeworkGetMethod)annotation).value();
+					
+					//verificar se existe parâmetro no path.
+					MethodParam methodParam = WebFrameworkUtil.convertURI2MethodParam(path);
+					if(methodParam != null) {
+						path = methodParam.getMethod();
+						if(methodParam.getParam() != null)
+							parameter = methodParam.getParam(); 
+					}
+					
 				}else if(annotation.annotationType().getName()
 						.equals("br.com.ehmf.webframework.annotations.WebframeworkPostMethod")) {
 					httpMethod = "POST";
 					path = ((WebframeworkPostMethod)annotation).value();
+					
+					//verificar se existe parâmetro no path.
+					MethodParam methodParam = WebFrameworkUtil.convertURI2MethodParam(path);
+					if(methodParam != null) {
+						path = methodParam.getMethod();
+						if(methodParam.getParam() != null)
+							parameter = methodParam.getParam(); 
+					}
 				}
 			}
 			//WebFrameworkLogger.log(" - CHAVE: ", httpMethod + path);
 			RequestControllerData getData = 
-					new RequestControllerData(httpMethod, path, className, method.getName());
+					new RequestControllerData(httpMethod, path, className, method.getName(),
+							parameter);
 			ControllerMap.values.put(httpMethod + path, getData); 
 		}
 		

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -13,9 +14,11 @@ import com.google.gson.Gson;
 import br.com.ehmf.webframework.datastructures.ControllerInstances;
 import br.com.ehmf.webframework.datastructures.ControllerMap;
 import br.com.ehmf.webframework.datastructures.DependencyInjectionMap;
+import br.com.ehmf.webframework.datastructures.MethodParam;
 import br.com.ehmf.webframework.datastructures.RequestControllerData;
 import br.com.ehmf.webframework.datastructures.ServiceImplementationMap;
 import br.com.ehmf.webframework.util.WebFrameworkLogger;
+import br.com.ehmf.webframework.util.WebFrameworkUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +39,12 @@ public class WebFrameworkDispatcherServlet extends HttpServlet {
 		PrintWriter out = new PrintWriter(resp.getWriter());
 		Gson gson = new Gson();
 		
-		String url = req.getRequestURI();
+		//String url = req.getRequestURI();
+		MethodParam methodParam = WebFrameworkUtil.convertURI2MethodParam(req.getRequestURI());
+		if(methodParam == null)
+			return;
+		String url = methodParam.getMethod();
+		
 		String httpMethod = req.getMethod().toUpperCase(); //GET POST
 		String key = httpMethod + url;
 		
@@ -75,6 +83,7 @@ public class WebFrameworkDispatcherServlet extends HttpServlet {
 			if(controllerMethod.getParameterCount() > 0) {
 				WebFrameworkLogger.log("WebFrameworkDispatcherServlet", "Método " 
 						+ controllerMethod.getName() + " tem parâmetros!");
+				/*
 				Object arg;
 				Parameter parameter = controllerMethod.getParameters()[0];
 				if(parameter.getAnnotations()[0].annotationType().getName()
@@ -93,6 +102,38 @@ public class WebFrameworkDispatcherServlet extends HttpServlet {
 							" com o parâmetro do tipo " + parameter.getType().toString() + 
 							" para requisição");				
 					out.println(gson.toJson(controllerMethod.invoke(controller, arg)));
+				}*/
+				Object arg;
+				Parameter[] parameters = controllerMethod.getParameters();
+				for(Parameter parameter : parameters) {
+					for(Annotation annotation : parameter.getAnnotations()) {
+						if(annotation.annotationType().getName()
+								.equals("br.com.ehmf.webframework.annotations.WebframeworkBody")) {
+							WebFrameworkLogger.log("", "     Procurando parâmetro da requisição do tipo " 
+									+ parameter.getType().getName());
+							String body = readBytesFromRequest(req);
+							
+							WebFrameworkLogger.log("", "     conteúdo do parâmetro: " 
+									+ body);
+							arg = gson.fromJson(body, parameter.getType());
+							
+							WebFrameworkLogger.log("WebFrameworkDispatcherServlet", 
+									"Invocar o método " + controllerMethod.getName() +
+									" com o parâmetro do tipo " + parameter.getType().toString() + 
+									" para requisição");				
+							out.println(gson.toJson(controllerMethod.invoke(controller, arg)));
+						}else if(annotation.annotationType().getName()
+								.equals("br.com.ehmf.webframework.annotations.WebframeworkPathVariable")) {
+							WebFrameworkLogger.log("", "     Procurando parâmetro da requisição do tipo " 
+									+ parameter.getType().getName());
+							WebFrameworkLogger.log("", "     conteúdo do parâmetro: " 
+									+ methodParam.getParam());
+							
+							arg = WebFrameworkUtil.convert2Type(methodParam.getParam(), parameter.getType());
+							
+							out.println(gson.toJson(controllerMethod.invoke(controller, arg)));
+						}
+					}
 				}
 			} else {
 				WebFrameworkLogger.log("WebFrameworkDispatcherServlet", 

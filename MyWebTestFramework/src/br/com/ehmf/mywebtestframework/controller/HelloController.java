@@ -6,6 +6,7 @@ import br.com.ehmf.webframework.annotations.WebframeworkBody;
 import br.com.ehmf.webframework.annotations.WebframeworkController;
 import br.com.ehmf.webframework.annotations.WebframeworkGetMethod;
 import br.com.ehmf.webframework.annotations.WebframeworkInject;
+import br.com.ehmf.webframework.annotations.WebframeworkPathVariable;
 import br.com.ehmf.webframework.annotations.WebframeworkPostMethod;
 
 @WebframeworkController
@@ -39,6 +40,12 @@ public class HelloController {
 	@WebframeworkGetMethod("/injected")
 	public String chamadaCustom() {
 		return iService.chamadaCustom("Hello injected");
+	}
+	
+	//http://localhost:8080/retornavalor/22222 == Retornando o valor de parametro: 22222
+	@WebframeworkGetMethod("/retornavalor/{valor}")
+	public String retornoValor(@WebframeworkPathVariable String valor) {
+		return "Retornando o valor de parametro: " + valor;
 	}
 
 	
