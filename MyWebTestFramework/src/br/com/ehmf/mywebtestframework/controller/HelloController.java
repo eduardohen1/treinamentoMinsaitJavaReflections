@@ -42,9 +42,9 @@ public class HelloController {
 		return iService.chamadaCustom("Hello injected");
 	}
 	
-	//http://localhost:8080/retornavalor/22222 == Retornando o valor de parametro: 22222
+	//http://localhost:8080/retornavalor/OI == Retornando o valor de parametro: 22222
 	@WebframeworkGetMethod("/retornavalor/{valor}")
-	public String retornoValor(@WebframeworkPathVariable String valor) {
+	public String retornoValor(@WebframeworkPathVariable Double valor) {
 		return "Retornando o valor de parametro: " + valor;
 	}
 

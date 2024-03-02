@@ -126,7 +126,7 @@ public class WebFrameworkDispatcherServlet extends HttpServlet {
 								.equals("br.com.ehmf.webframework.annotations.WebframeworkPathVariable")) {
 							WebFrameworkLogger.log("", "     Procurando parâmetro da requisição do tipo " 
 									+ parameter.getType().getName());
-							WebFrameworkLogger.log("", "     conteúdo do parâmetro: " 
+							WebFrameworkLogger.log("", "     Conteúdo do parâmetro: " 
 									+ methodParam.getParam());
 							
 							arg = WebFrameworkUtil.convert2Type(methodParam.getParam(), parameter.getType());

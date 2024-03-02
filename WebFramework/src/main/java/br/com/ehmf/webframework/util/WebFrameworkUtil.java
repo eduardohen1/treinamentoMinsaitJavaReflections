@@ -32,21 +32,33 @@ public class WebFrameworkUtil {
 	}
 	
 	public static Object convert2Type(String value, Class<?> type) {
-		if(value == null) 
+		if(value == null) {
+			WebFrameworkLogger.log("WebFrameworkUtil", 
+					"Parâmetro passado é null.");
 			value = "";
-		
-		if(type.isAssignableFrom(String.class)) {
-			return value;
-		}else if(type.isAssignableFrom(Integer.class) || type.getName().equals("int")) {
-			if(isNumeric(value))
-				return Integer.parseInt(value);
-			return 0;
-		}else if (type.isAssignableFrom(Double.class) || type.getName().equals("double")) {
-			if(isNumeric(value))
-				return Double.parseDouble(value);
-			return 0.0;
 		}
-		return null;
+		
+		try {
+			if(type.isAssignableFrom(String.class)) {
+				return value;
+			}else if(type.isAssignableFrom(Integer.class) || type.getName().equals("int")) {
+				if(isNumeric(value))
+					return Integer.parseInt(value);
+				return 0;
+			}else if (type.isAssignableFrom(Double.class) || type.getName().equals("double")) {
+				if(isNumeric(value))
+					return Double.parseDouble(value);
+				return 0.0;
+			}
+			return null;
+		} catch (Exception e) {
+			WebFrameworkLogger.log("WebFrameworkUtil", 
+					"Erro ao converter parâmetro em objeto: " + e.getMessage());
+			if(type.isAssignableFrom(String.class))	return "";
+			if(type.isAssignableFrom(Integer.class) || type.getName().equals("int"))    return 0;
+			if(type.isAssignableFrom(Double.class)  || type.getName().equals("double")) return 0.0;
+			return null;
+		}
 	}
 
 	/**
